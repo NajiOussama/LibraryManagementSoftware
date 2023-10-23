@@ -12,14 +12,14 @@
    <children>
       <AnchorPane layoutX="102.0" layoutY="50.0" prefHeight="370.0" prefWidth="487.0" styleClass="card-form" stylesheets="@designLogin.css">
          <children>
-            <Label layoutX="212.0" layoutY="87.0" text="Login">
+            <Label layoutX="212.0" layoutY="87.0" text="Login" textFill="#f5f0f0">
                <font>
                   <Font name="Microsoft Sans Serif" size="30.0" />
                </font>
             </Label>
             <TextField fx:id="studentNumber" layoutX="151.0" layoutY="151.0" prefHeight="26.0" prefWidth="197.0" promptText="Student Number " />
             <PasswordField fx:id="password" layoutX="151.0" layoutY="197.0" prefHeight="26.0" prefWidth="197.0" promptText="Password" />
-            <Button fx:id="Login_btn" layoutX="213.0" layoutY="249.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="74.0" text="Login" />
+            <Button fx:id="Login_btn" layoutX="213.0" layoutY="249.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="74.0" styleClass="Login_btn" text="Login" />
             <FontAwesomeIcon fill="#f2eeee" glyphName="USERS" layoutX="215.0" layoutY="70.0" size="5em" />
          </children>
       </AnchorPane>
