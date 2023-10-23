@@ -1,0 +1,23 @@
+@startuml
+
+title Exemple d'Interaction Utilisateur
+
+actor Utilisateur
+participant IHM
+participant Contrôleur
+database "Base de Données" as BD
+participant Objet1
+participant Objet2
+participant Objet3
+
+Utilisateur -> IHM: Clique sur "Afficher Emprunts"
+IHM -> Contrôleur: Callback - Afficher Emprunts
+Contrôleur -> BD: Requête SQL - Sélectionner Emprunts
+BD --> Contrôleur: Résultats de la requête
+Contrôleur -> Objet1: Instanciation d'objets Emprunt
+Contrôleur -> Objet2: Instanciation d'objets Livre
+Contrôleur -> Objet3: Instanciation d'objets Adhérent
+Contrôleur -> IHM: Mise à jour de l'IHM avec les Emprunts
+IHM --> Utilisateur: Affiche les Emprunts
+
+@enduml

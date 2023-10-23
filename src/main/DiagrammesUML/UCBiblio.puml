@@ -1,0 +1,35 @@
+@startuml
+
+
+
+actor Member as "Adhérent"
+actor Admin as "Administrateur"
+
+rectangle "Authentification" {
+  Member -- (S'authentifier)
+  Admin -- (S'authentifier)
+}
+
+rectangle "Gestion des Livres" {
+  Member -- (Consulter la liste des livres disponibles)
+  Member -- (Rechercher un livre)
+  Member -- (Emprunter un livre)
+  Member -- (Retourner un livre)
+  Admin  -- (Ajouter un nouveau livre)
+  Admin -- (Supprimer un livre)
+  Admin -- (Rechercher un livre)
+  Admin -- (Consulter la liste des livres disponibles)
+}
+
+rectangle "Gestion des Adhérents" {
+  Member -- (Consulter ses informations personnelles)
+  Member -- (Consulter ses emprunts)
+  Admin  -- (Lister les adhérents)
+  Admin -- (Voir les informations personnelles d'un adhérent)
+  Admin  -- (Créer un nouvel adhérent)
+  Admin  -- (Supprimer un adhérent)
+}
+
+
+
+@enduml

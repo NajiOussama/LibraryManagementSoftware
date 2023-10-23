@@ -1,0 +1,52 @@
+@startuml
+
+
+
+
+state IHMLogin {
+
+state IHMAdherent
+state IHMAdmin
+state Connexion
+
+ [*] --> Connexion: Démarrage
+ Connexion --> IHMAdmin : Connexion Admin
+ Connexion --> IHMAdherent : Connexion Adherent
+  }
+
+state IHMAdmin {
+
+state Initialisationdelabibliothèque
+state creerunenouvellebibliothèque
+state importerunebibliothèquedudisque
+state Gérerleslivres
+state Gérerlesutilisateurs
+state Gérerlesemprunts
+state Bibliothequechargee
+
+[*] --> Initialisationdelabibliothèque
+Initialisationdelabibliothèque --> creerunenouvellebibliothèque : Créer nouvelle bibliothèque
+Initialisationdelabibliothèque --> importerunebibliothèquedudisque : Importer bibliothèque
+creerunenouvellebibliothèque --> Bibliothequechargee : Bibliothèque créée
+importerunebibliothèquedudisque --> Bibliothequechargee : Bibliothèque importée
+Bibliothequechargee --> Gérerlesutilisateurs : Gérer les utilisateurs
+Bibliothequechargee --> Gérerlesemprunts : Gérer les emprunts
+Bibliothequechargee --> Gérerleslivres : Gérer les livres
+
+
+}
+
+state IHMAdherent {
+
+state Chercherunlivre
+state Demanderempruntlivre
+state Gérersesinformations
+
+[*] --> Chercherunlivre : Barre de recherche
+[*] --> Gérersesinformations : : Paramètres Profil
+Chercherunlivre --> Demanderempruntlivre :Demander emprunt
+Demanderempruntlivre--> Chercherunlivre : Retour
+
+
+
+@enduml

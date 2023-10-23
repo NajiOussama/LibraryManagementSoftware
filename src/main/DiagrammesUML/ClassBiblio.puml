@@ -1,0 +1,59 @@
+@startuml
+
+class Membre {
+  +ID: Integer
+  +Nom: String
+  +Prénom: String
+  +Identifiant: String
+  +MotDePasse: String
+}
+
+class Admin {
+  +ID: INT
+  +Nom: String
+  +Prénom: String
+  +Identifiant: String
+  +MotDePasse: String
+}
+
+
+class Livre {
+  +Titre: String
+  +Auteur: String
+  +ISBN: String
+}
+
+class Emprunt {
+  +ID: int
+  +DateEmprunt: Date
+  +DateRetour: Date
+  +LivreEmprunteISBN: String
+  +MembreEmprunteurID: int
+
+
+}
+
+class Controleur {
+  +Authentification(identifiant: String, motDePasse: String): Boolean
+  +ConsulterListeLivresDisponibles(): List<Livre>
+  +RechercherLivre(titre: String): Livre
+  +EmprunterLivre(livre: Livre, membre: Membre): Emprunt
+  +RetournerLivre(emprunt: Emprunt): Boolean
+  +AjouterLivre(livre: Livre): Boolean
+  +SupprimerLivre(livre: Livre): Boolean
+  +ConsulterInfosPersonnellesMembre(membre: Membre): Membre
+  +ConsulterEmprunts(membre: Membre): List<Emprunt>
+  +ListerMembres(): List<Membre>
+  +VoirInfosPersonnellesMembre(membre: Membre): Membre
+  +CreerNouvelMembre(nom: String, prenom: String, identifiant: String, motDePasse: String): Membre
+  +SupprimerMembre(membre: Membre): Boolean
+}
+
+Membre --|> Controleur
+Admin --|> Controleur
+Livre--|>Emprunt : est emprunté
+Membre--|>Emprunt : a emprunté
+Emprunt--|>Controleur
+
+Admin --|> Membre : Hérite
+@enduml
