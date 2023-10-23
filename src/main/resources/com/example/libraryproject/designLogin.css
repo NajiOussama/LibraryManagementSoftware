@@ -16,6 +16,9 @@ and open the template in the editor.
     Created on : 08 4, 22, 7:57:03 PM
     Author     : WINDOWS 10
 */
+/* Fond du formulaire de connexion */
+/* Fond du formulaire de connexion */
+
 
 .login-form{
     -fx-background-color:linear-gradient(to bottom right, #252d50, #324f6b);
@@ -65,5 +68,17 @@ and open the template in the editor.
 }
 
 .Login_btn:hover{
+    -fx-background-color:#559bc9;
+}
+
+.clique{
+    -fx-background-color:#468ec2;
+    -fx-background-radius:15px;
+    -fx-cursor:hand;
+    -fx-text-fill:#fff;
+    -fx-font-size:15px;
+}
+
+.clique:hover{
     -fx-background-color:#559bc9;
 }

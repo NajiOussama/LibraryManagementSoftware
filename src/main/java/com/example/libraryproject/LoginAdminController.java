@@ -10,16 +10,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.scene.input.MouseEvent;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-public class HelloController {
-    @FXML
-    private TextField studentNumber;
+public class LoginAdminController {
 
     @FXML
     private Button Login_btn;
@@ -30,35 +28,41 @@ public class HelloController {
     @FXML
     private Button minimize;
 
+    @FXML
+    private PasswordField password;
+
+    @FXML
+    private TextField AdminNumber;
+
     private Connection connect;
 
     private PreparedStatement prepare;
     private Statement statement;
     private ResultSet result;
-    private double x = 0;
-    private double y = 0;
 
-    public void login(){
 
-        String sql = "SELECT * FROM student WHERE studentNumber = ? and password = ?";
+    @FXML
+    void login(ActionEvent event) {
+
+        String sql = "SELECT * FROM Admin WHERE AdminNumber = ? and password = ?";
 
         connect = SqlController.connectDB();
 
         try{
 
             prepare = connect.prepareStatement(sql);
-            prepare.setString(1, studentNumber.getText());
+            prepare.setString(1, AdminNumber.getText());
             prepare.setString(2, password.getText());
             result = prepare.executeQuery();
 
             Alert alert;
 
-            if(studentNumber.getText().isEmpty() || password.getText().isEmpty()){
+            if(AdminNumber.getText().isEmpty() || password.getText().isEmpty()){
 
                 alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Admin Message");
+                alert.setTitle("Message d'erreur");
                 alert.setHeaderText(null);
-                alert.setContentText("Please fill all blank fields.");
+                alert.setContentText("Veuillez remplir tous les champs vides.");
                 alert.showAndWait();
             }else{
                 if(result.next()){
@@ -75,39 +79,41 @@ public class HelloController {
                     alert.showAndWait();
 
 //                    TO HIDE THE LOGIN FORM
-                    //Login_btn.getScene().getWindow().hide();
+                    Login_btn.getScene().getWindow().hide();
 
 //                    FOR DASHBOARD
-                    Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("dashboardAdmin.fxml"));
 
                     Stage stage = new Stage();
 
                     Scene scene = new Scene(root);
 
+                    stage.setScene(scene);
+                    stage.show();
+
                     //root.setOnMousePressed((MouseEvent event) ->{
 
-                      //  x = event.getSceneX();
-                       // y = event.getSceneY();
+                    //  x = event.getSceneX();
+                    // y = event.getSceneY();
 
                     //});
 
                     //root.setOnMouseDragged((MouseEvent event) ->{
 
-                      //  stage.setX(event.getScreenX() - x);
-                       // stage.setY(event.getScreenY() - y);
+                    //  stage.setX(event.getScreenX() - x);
+                    // stage.setY(event.getScreenY() - y);
 
                     //});
 
                     //stage.initStyle(StageStyle.TRANSPARENT);
 
-                    stage.setScene(scene);
-                    stage.show();
+
 
                 }else{
                     alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Admin Message");
+                    alert.setTitle("Message d'erreur");
                     alert.setHeaderText(null);
-                    alert.setContentText("Wrong Username or Password.");
+                    alert.setContentText("Nom d'utilisateur ou mot de passe incorrect");
                     alert.showAndWait();
                 }
             }
@@ -116,9 +122,20 @@ public class HelloController {
 
     }
 
-
     @FXML
-    private PasswordField password;
+    void etudiantcliqueici(ActionEvent event)  throws IOException {
+        Login_btn.getScene().getWindow().hide();
+
+        Parent root = FXMLLoader.load(getClass().getResource("LoginEtudiant.fxml"));
+
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
 
     @FXML
     public void minimize() {

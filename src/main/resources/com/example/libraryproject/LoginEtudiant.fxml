@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="691.0" styleClass="login-form" stylesheets="@designLogin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="469.0" prefWidth="691.0" styleClass="login-form" stylesheets="@designLogin.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.LoginEtudiantController">
    <children>
       <AnchorPane layoutX="102.0" layoutY="50.0" prefHeight="370.0" prefWidth="487.0" styleClass="card-form" stylesheets="@designLogin.css">
          <children>
@@ -19,8 +19,14 @@
             </Label>
             <TextField fx:id="studentNumber" layoutX="151.0" layoutY="151.0" prefHeight="26.0" prefWidth="197.0" promptText="Student Number " styleClass="textfield" stylesheets="@designLogin.css" />
             <PasswordField fx:id="password" layoutX="151.0" layoutY="197.0" prefHeight="26.0" prefWidth="197.0" promptText="Password" styleClass="textfield" stylesheets="@designLogin.css" />
-            <Button fx:id="Login_btn" layoutX="213.0" layoutY="249.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="74.0" styleClass="Login_btn" text="Login" />
+            <Button fx:id="Login_btn" layoutX="204.0" layoutY="265.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="90.0" styleClass="Login_btn" stylesheets="@designLogin.css" text="Login" />
             <FontAwesomeIcon fill="WHITE" glyphName="USERS" layoutX="215.0" layoutY="70.0" size="5em" />
+            <Label layoutX="348.0" layoutY="14.0" text="Admin ?" textFill="WHITE">
+               <font>
+                  <Font name="Microsoft Sans Serif" size="17.0" />
+               </font>
+            </Label>
+            <Button alignment="CENTER" layoutX="348.0" layoutY="34.0" mnemonicParsing="false" onAction="#admincliqueici" styleClass="clique" stylesheets="@designLogin.css" text="Clique ici !" />
          </children>
       </AnchorPane>
       <Button fx:id="close" layoutX="639.0" layoutY="1.0" mnemonicParsing="false" onAction="#exit" prefHeight="24.0" prefWidth="52.0" styleClass="close" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="2.0" />
