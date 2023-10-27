@@ -26,23 +26,43 @@ public class AjouterLivreController {
     @FXML
     private Button saveButton;
 
+    boolean isNumeric(String str) {
+        try {
+            Double.parseDouble(str); // Essayez de convertir la chaîne en double
+            return true; // Si la conversion réussit, la chaîne est un nombre
+        } catch (NumberFormatException e) {
+            return false; // Si une exception est levée, la chaîne n'est pas un nombre
+        }
+    }
+
     @FXML
     void addBook(ActionEvent event) {
         // Récupérez les valeurs des champs Titre, Auteur et ISBN
         String titre = Titre.getText();
         String auteur = Auteur.getText();
         String isbn = ISBN.getText();
-
+        Alert alert;
         // Vérifiez que les champs ne sont pas vides
         if (titre.isEmpty() || auteur.isEmpty() || isbn.isEmpty()) {
-            // Gérez le cas où un champ est vide (vous pouvez afficher un message d'erreur, par exemple)
-            return;
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Message d'erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez remplir tous les champs vides.");
+            alert.showAndWait();
+        }
+
+        if (!isNumeric(isbn) && !isbn.isEmpty()) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Message d'erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("L'ISBN doit être un nombre.");
+            alert.showAndWait();
         }
 
         // Établissez une connexion à la base de données
         Connection connection = SqlController.connectDB();
 
-        if (connection != null) {
+        if (connection != null && isNumeric(isbn)) {
             try {
                 // Créez la requête SQL d'insertion
                 String insertQuery = "INSERT INTO Livre (Titre, Auteur, ISBN) VALUES (?, ?, ?)";
@@ -51,9 +71,10 @@ public class AjouterLivreController {
                 preparedStatement.setString(2, auteur);
                 preparedStatement.setString(3, isbn);
 
+
                 // Exécutez la requête
                 int rowsAffected = preparedStatement.executeUpdate();
-                Alert alert;
+
 
                 if (rowsAffected > 0) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
@@ -75,10 +96,14 @@ public class AjouterLivreController {
 
             } catch (SQLException e) {
                 e.printStackTrace();
-                // Gérez les erreurs de base de données ici
+                alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Message d'erreur");
+                alert.setHeaderText(null);
+                alert.setContentText("Échec de l'insertion du livre.");
+                alert.showAndWait();
             }
         } else {
-            // Gérez le cas où la connexion à la base de données a échoué
+
         }
     }
 
