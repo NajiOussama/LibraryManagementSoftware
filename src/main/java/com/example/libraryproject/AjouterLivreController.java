@@ -5,6 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -19,6 +23,9 @@ public class AjouterLivreController {
 
     @FXML
     private TextField Titre;
+
+    @FXML
+    private AnchorPane rootPane;
 
     @FXML
     private Button cancelButton;
@@ -107,10 +114,11 @@ public class AjouterLivreController {
         }
     }
 
-
     @FXML
-    void cancel(ActionEvent event) {
-
+    private void cancel(ActionEvent event) {
+        Stage stage = (Stage) rootPane.getScene().getWindow();
+        stage.close();
     }
+
 
 }
