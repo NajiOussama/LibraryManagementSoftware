@@ -17,7 +17,7 @@
                   <Font name="Microsoft Sans Serif" size="30.0" />
                </font>
             </Label>
-            <TextField fx:id="studentNumber" layoutX="151.0" layoutY="151.0" prefHeight="26.0" prefWidth="197.0" promptText="Student Number " styleClass="textfield" stylesheets="@designLogin.css" />
+            <TextField fx:id="ID" layoutX="151.0" layoutY="151.0" prefHeight="26.0" prefWidth="197.0" promptText="Student Number " styleClass="textfield" stylesheets="@designLogin.css" />
             <PasswordField fx:id="password" layoutX="151.0" layoutY="197.0" prefHeight="26.0" prefWidth="197.0" promptText="Password" styleClass="textfield" stylesheets="@designLogin.css" />
             <Button fx:id="Login_btn" layoutX="204.0" layoutY="265.0" mnemonicParsing="false" onAction="#login" prefHeight="36.0" prefWidth="90.0" styleClass="Login_btn" stylesheets="@designLogin.css" text="Login" />
             <FontAwesomeIcon fill="WHITE" glyphName="USERS" layoutX="215.0" layoutY="70.0" size="5em" />

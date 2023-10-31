@@ -103,9 +103,9 @@ public class ListeLivresController implements Initializable {
             }
 
             // Afficher les données récupérées
-            for (Livre livre : livresList) {
-                System.out.println("Titre: " + livre.getTitle() + ", Auteur: " + livre.getAuthor() + ", ISBN: " + livre.getISBN() + ", Disponible: " + livre.isDispo());
-            }
+            //for (Livre livre : livresList) {
+            //    System.out.println("Titre: " + livre.getTitle() + ", Auteur: " + livre.getAuthor() + ", ISBN: " + livre.getISBN() + ", Disponible: " + livre.isDispo());
+            //}
 
             return livresList;
         } catch (SQLException e) {
