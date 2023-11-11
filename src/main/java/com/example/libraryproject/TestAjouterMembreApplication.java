@@ -14,7 +14,7 @@ public class TestAjouterMembreApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("SupprimerLivre.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Emprunter.fxml"));
         Scene scene = new Scene(root);
         //root.setOnMousePressed((MouseEvent event) ->{
 

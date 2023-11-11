@@ -12,7 +12,7 @@ public class TestListeMembresApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        Parent root = FXMLLoader.load(getClass().getResource("ListeLivres.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("dashboardStudent.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

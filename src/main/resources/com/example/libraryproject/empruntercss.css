@@ -1,0 +1,27 @@
+.password {
+    -fx-background-color: transparent; /* Couleur de fond transparente */
+    -fx-text-fill: transparent; /* Rend le texte invisible */
+}
+
+.password .text {
+    -fx-background-color: transparent; /* Couleur de fond transparente pour le texte */
+    -fx-text-fill: transparent; /* Rend le texte invisible */
+}
+
+.password .prompt-text {
+    -fx-text-fill: black; /* Couleur du texte de l'invite */
+}
+
+.password:hover,
+.password:focused,
+.password:filled {
+    -fx-background-color: transparent; /* Couleur de fond transparente lorsqu'il est survolé, focalisé ou rempli */
+}
+
+.password:showing {
+    -fx-background-color: transparent; /* Couleur de fond transparente lorsque le texte est affiché */
+}
+
+.password:showing .text {
+    -fx-text-fill: black; /* Couleur du texte lorsqu'il est affiché */
+}
