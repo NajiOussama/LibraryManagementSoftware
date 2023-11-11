@@ -10,7 +10,7 @@
             <columns>
                 <TableColumn fx:id="nomCol" prefWidth="75.0" text="Nom" />
                 <TableColumn fx:id="prenomCol" prefWidth="75.0" text="Prénom" />
-                <TableColumn fx:id="IDCol" prefWidth="75.0" text="ID" />
+                <TableColumn fx:id="StudentNumberCol" prefWidth="75.0" text="Numéro étudiant" />
                 <TableColumn fx:id="MdpCol" prefWidth="75.0" text="Mot de passe" />
             </columns>
             <columnResizePolicy>

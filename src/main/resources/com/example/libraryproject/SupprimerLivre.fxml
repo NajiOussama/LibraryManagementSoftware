@@ -7,23 +7,28 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="rootPane" prefHeight="209.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.AjouterMembreController">
+<AnchorPane fx:id="rootPane" prefHeight="232.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.SupprimerLivreController">
     <children>
-        <VBox prefHeight="209.0" prefWidth="379.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <VBox prefHeight="289.0" prefWidth="492.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <TextField fx:id="nom" promptText="Nom">
+                <TextField fx:id="Titre" promptText="Titre">
                     <VBox.margin>
                         <Insets left="10.0" right="10.0" top="20.0" />
                     </VBox.margin>
                 </TextField>
-                <TextField fx:id="prenom" layoutX="20.0" layoutY="30.0" promptText="Prénom">
+                <TextField fx:id="Auteur" layoutX="20.0" layoutY="30.0" promptText="Auteur">
                     <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                     </VBox.margin>
                 </TextField>
+                <TextField fx:id="ISBN" layoutX="20.0" layoutY="30.0" promptText="ISBN">
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                    </VBox.margin>
+                </TextField>
                 <HBox prefHeight="47.0" prefWidth="492.0">
                     <children>
-                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#addMember" prefHeight="47.0" prefWidth="189.0" stylesheets="@AjouterLivre.css" text="Enregister" />
+                        <Button fx:id="saveButton" mnemonicParsing="false" onAction="#removeBook" prefHeight="47.0" prefWidth="189.0" stylesheets="@AjouterLivre.css" text="Enregister" />
                         <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancel" prefHeight="47.0" prefWidth="194.0" stylesheets="@AjouterLivre.css" text="Annuler" />
                     </children>
                     <VBox.margin>

@@ -13,13 +13,14 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 
-public class AjouterMembreController {
+public class SupprimerMembreController {
 
     @FXML
     private Button cancelButton;
 
     @FXML
     private TextField StudentNumber;
+
 
     @FXML
     private TextField nom;
@@ -35,11 +36,12 @@ public class AjouterMembreController {
 
 
     @FXML
-    private void addMember(ActionEvent event) {
+    private void removeMember(ActionEvent event) {
         String mnom = nom.getText();
         String mprenom = prenom.getText();
+        String mStudentNumber = StudentNumber.getText();
 
-        if (mnom.isEmpty() || mprenom.isEmpty()) {
+        if (mnom.isEmpty() || mprenom.isEmpty()|| mStudentNumber.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Message d'erreur");
             alert.setHeaderText(null);
@@ -50,54 +52,44 @@ public class AjouterMembreController {
 
         Connection connection = SqlController.connectDB();
 
-        if (connection != null && !mnom.isEmpty() && !mprenom.isEmpty()) {
+        if (connection != null && !mnom.isEmpty() && !mprenom.isEmpty() && !mStudentNumber.isEmpty()) {
             Alert alert;
             try {
-                int randomStudentNumber = (int) (Math.random() * 9000000) + 1000000;
-                String mStudentNumber = String.valueOf(randomStudentNumber);
                 // Créez la requête SQL d'insertion
-                String insertQuery = "INSERT INTO student (Nom, Prénom, password, StudentNumber) " +
-                        "VALUES (?, ?, LEFT(MD5(CONCAT(Nom, Prénom, NOW())), 8), ?)";
-                PreparedStatement preparedStatement = connection.prepareStatement(insertQuery);
+                String deleteQuery = "DELETE FROM student WHERE Nom = ? AND Prénom = ? AND StudentNumber = ?";
+                PreparedStatement preparedStatement = connection.prepareStatement(deleteQuery);
                 preparedStatement.setString(1, mnom);
                 preparedStatement.setString(2, mprenom);
                 preparedStatement.setString(3, mStudentNumber);
 
-
-                // Exécutez la requête
+                // Exécutez la requête de suppression
                 int rowsAffected = preparedStatement.executeUpdate();
-
 
                 if (rowsAffected > 0) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Admin Message");
+                    alert.setTitle("Information");
                     alert.setHeaderText(null);
-                    alert.setContentText("Membre ajouté avec succès dans la base de données.");
+                    alert.setContentText("Membre supprimé avec succès.");
                     alert.showAndWait();
                 } else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Message d'erreur");
                     alert.setHeaderText(null);
-                    alert.setContentText("Échec de l'ajout du membre.");
+                    alert.setContentText("Aucun membre trouvé avec les informations fournies.");
                     alert.showAndWait();
                 }
-
-                // Fermez la connexion et le statement
-                preparedStatement.close();
-                connection.close();
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Message d'erreur");
                 alert.setHeaderText(null);
-                alert.setContentText("Échec de l'ajout du membre.");
+                alert.setContentText("Échec de la suppression du membre.");
                 alert.showAndWait();
             }
-        } else {
-
         }
-    }
+        }
+
 
     @FXML
     private void cancel(ActionEvent event) {

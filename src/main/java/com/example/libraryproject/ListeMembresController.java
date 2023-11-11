@@ -30,7 +30,7 @@ public class ListeMembresController implements Initializable {
     private TableColumn<student, String> prenomCol;
 
     @FXML
-    private TableColumn<student, Integer> IDCol;
+    private TableColumn<student, Integer> StudentNumberCol;
 
     @FXML
     private TableColumn<student, String> MdpCol;
@@ -49,7 +49,7 @@ public class ListeMembresController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         nomCol.setCellValueFactory(new PropertyValueFactory<>("nom"));
         prenomCol.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        IDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        StudentNumberCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         MdpCol.setCellValueFactory(new PropertyValueFactory<>("motdepasse"));
         tableView.setItems(getMembresFromDB());
     }
@@ -58,7 +58,7 @@ public class ListeMembresController implements Initializable {
         ObservableList<student> studentList = FXCollections.observableArrayList();
 
         try {
-            String query = "SELECT ID, Nom, Prénom, password FROM student";
+            String query = "SELECT Nom, Prénom, password, StudentNumber FROM student";
             connect = SqlController.connectDB();
             statement = connect.createStatement();
             result = statement.executeQuery(query);
@@ -66,9 +66,9 @@ public class ListeMembresController implements Initializable {
             while (result.next()) {
                 String nom = result.getString("Nom");
                 String prenom = result.getString("Prénom");
-                int id = result.getInt("ID");
+                int StudentNumber = result.getInt("StudentNumber");
                 String motdepasse = result.getString("password");
-                studentList.add(new student(nom, prenom, id, motdepasse));
+                studentList.add(new student(nom, prenom, StudentNumber, motdepasse));
             }
 
             return studentList;

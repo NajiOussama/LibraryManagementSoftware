@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -17,160 +18,200 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="637.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <BorderPane prefHeight="200.0" prefWidth="200.0">
-         <top>
-            <MenuBar BorderPane.alignment="CENTER">
-              <menus>
-                <Menu mnemonicParsing="false" text="File">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Close" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Edit">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Delete" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Help">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="About" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-         </top>
-         <right>
-            <VBox prefHeight="423.0" prefWidth="155.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" text="Ajouter Membre">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../../Downloads/add_mem.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" text="Ajouter Livre">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../../Downloads/add_book.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" text="Tous les Membres">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../../Downloads/list_mem.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" text="Tous les Livres">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../../Downloads/list_book.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-                  <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="100.0" prefWidth="155.0" text="Paramètres">
-                     <graphic>
-                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../../../../../../../../../Downloads/settings.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                  </Button>
-               </children>
-            </VBox>
-         </right>
-         <center>
-            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
-                <Tab text="Livres Empruntés">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox prefHeight="391.0" prefWidth="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="152.0" prefWidth="482.0">
-                                       <children>
-                                          <TextField promptText="Entrer l'ISBN ">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <VBox alignment="CENTER" prefHeight="152.0" prefWidth="324.0">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                             <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du livre" textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Auteur " textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="152.0" prefWidth="482.0">
-                                       <children>
-                                          <TextField promptText="Entrer l'ID ">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <VBox alignment="CENTER" prefHeight="152.0" prefWidth="324.0">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                             <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom " textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                                       <children>
-                                          <Button mnemonicParsing="false" text="Emprunter" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children></AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Untitled Tab 2">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                  </content>
-                </Tab>
-              </tabs>
-            </TabPane>
-         </center>
-      </BorderPane>
-   </children>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="583.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.dashboardAdminController">
+    <children>
+        <BorderPane prefHeight="250.0" prefWidth="200.0">
+            <top>
+                <MenuBar BorderPane.alignment="CENTER">
+                    <menus>
+                        <Menu mnemonicParsing="false" text="File">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Close" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Edit">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="Delete" />
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Help">
+                            <items>
+                                <MenuItem mnemonicParsing="false" text="About" />
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+            </top>
+            <right>
+                <VBox prefHeight="410.0" prefWidth="155.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#AjouterMembre" prefHeight="80.0" prefWidth="155.0" text="Ajouter Membre">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/add_mem.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#SupprimerMembre" prefHeight="80.0" prefWidth="155.0" text="Supprimer Membre">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/remove.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#AjouterLivre" prefHeight="80.0" prefWidth="155.0" text="Ajouter Livre">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/add_book.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#SupprimerLivre" prefHeight="80.0" prefWidth="155.0" text="Supprimer Livre">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/removelivre.jpeg" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#TouslesMembres" prefHeight="80.0" prefWidth="155.0" text="Tous les Membres">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/list_mem.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#TouslesLivres" prefHeight="80.0" prefWidth="155.0" text="Tous les Livres">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/list_book.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                            <VBox.margin>
+                                <Insets />
+                            </VBox.margin>
+                        </Button>
+                        <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#SeDeco" prefHeight="80.0" prefWidth="155.0" text="Se Déconnecter">
+                            <graphic>
+                                <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                                    <image>
+                                        <Image url="@icons/logout.png" />
+                                    </image>
+                                </ImageView>
+                            </graphic>
+                        </Button>
+                    </children>
+                </VBox>
+            </right>
+            <center>
+                <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+                    <tabs>
+                        <Tab text="Infos">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <VBox prefHeight="391.0" prefWidth="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <children>
+                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0">
+                                                    <children>
+                                                        <TextField promptText="ISBN">
+                                                            <HBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                        <VBox alignment="CENTER" prefHeight="152.0" prefWidth="324.0">
+                                                            <HBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                            </HBox.margin>
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du livre" textAlignment="CENTER" wrappingWidth="284.0849609375">
+                                                                    <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Auteur " textAlignment="CENTER" wrappingWidth="284.0849609375">
+                                                                    <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0">
+                                                    <children>
+                                                        <TextField promptText="Numéro étudiant">
+                                                            <HBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                            </HBox.margin>
+                                                        </TextField>
+                                                        <VBox alignment="CENTER" prefHeight="152.0" prefWidth="324.0">
+                                                            <HBox.margin>
+                                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                                            </HBox.margin>
+                                                            <children>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom " textAlignment="CENTER" wrappingWidth="284.0849609375">
+                                                                    <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prénom" textAlignment="CENTER" wrappingWidth="284.0849609375">
+                                                                    <VBox.margin>
+                                                                        <Insets top="10.0" />
+                                                                    </VBox.margin>
+                                                                </Text>
+                                                            </children>
+                                                        </VBox>
+                                                    </children>
+                                                </HBox>
+                                            </children>
+                                        </VBox>
+                                    </children></AnchorPane>
+                            </content>
+                        </Tab>
+                        <Tab text="Emprunts">
+                            <content>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                    <children>
+                                        <BorderPane layoutX="76.0" layoutY="71.0" prefHeight="418.0" prefWidth="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <top>
+                                                <TextField prefHeight="26.0" prefWidth="409.0" promptText="Entrer le Numéro Etudiant " BorderPane.alignment="CENTER">
+                                                    <BorderPane.margin>
+                                                        <Insets left="20.0" right="20.0" top="10.0" />
+                                                    </BorderPane.margin>
+                                                </TextField>
+                                            </top>
+                                            <center>
+                                                <ListView prefHeight="417.0" prefWidth="507.0" BorderPane.alignment="CENTER">
+                                                    <padding>
+                                                        <Insets bottom="10.0" left="20.0" right="20.0" top="10.0" />
+                                                    </padding>
+                                                </ListView>
+                                            </center>
+                                        </BorderPane>
+                                    </children></AnchorPane>
+                            </content>
+                        </Tab>
+                    </tabs>
+                </TabPane>
+            </center>
+        </BorderPane>
+    </children>
 </StackPane>

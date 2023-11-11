@@ -19,7 +19,7 @@ import java.sql.Statement;
 
 public class LoginEtudiantController {
     @FXML
-    private TextField ID;
+    private TextField StudentNumber;
 
     @FXML
     private Button Login_btn;
@@ -46,20 +46,20 @@ public class LoginEtudiantController {
 
     public void login(){
 
-        String sql = "SELECT * FROM student WHERE ID = ? and password = ?";
+        String sql = "SELECT * FROM student WHERE StudentNumber = ? and password = ?";
 
         connect = SqlController.connectDB();
 
         try{
 
             prepare = connect.prepareStatement(sql);
-            prepare.setString(1, ID.getText());
+            prepare.setString(1, StudentNumber.getText());
             prepare.setString(2, password.getText());
             result = prepare.executeQuery();
 
             Alert alert;
 
-            if(ID.getText().isEmpty() || password.getText().isEmpty()){
+            if(StudentNumber.getText().isEmpty() || password.getText().isEmpty()){
 
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Message d'erreur");
