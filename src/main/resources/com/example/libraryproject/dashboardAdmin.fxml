@@ -129,7 +129,7 @@
                                     <children>
                                         <VBox prefHeight="391.0" prefWidth="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0">
+                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0" style="-fx-background-color: #e7e7e7;">
                                                     <children>
                                                         <TextField promptText="ISBN">
                                                             <HBox.margin>
@@ -154,8 +154,11 @@
                                                             </children>
                                                         </VBox>
                                                     </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </VBox.margin>
                                                 </HBox>
-                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0">
+                                                <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0" style="-fx-background-color: #e7e7e7;">
                                                     <children>
                                                         <TextField promptText="Numéro étudiant">
                                                             <HBox.margin>
@@ -180,6 +183,9 @@
                                                             </children>
                                                         </VBox>
                                                     </children>
+                                       <VBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
+                                       </VBox.margin>
                                                 </HBox>
                                             </children>
                                         </VBox>

@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EmprunterController {
@@ -62,35 +63,51 @@ public class EmprunterController {
                     var availabilityResult = checkAvailabilityStatement.executeQuery();
 
                     if (availabilityResult.next() && availabilityResult.getBoolean("Disponible")) {
-                        // Mettre à jour la disponibilité du livre
-                        String updateAvailabilityQuery = "UPDATE Livre SET Disponible = 0 WHERE ISBN = ?";
-                        PreparedStatement updateAvailabilityStatement = connection.prepareStatement(updateAvailabilityQuery);
-                        updateAvailabilityStatement.setString(1, misbn);
-                        updateAvailabilityStatement.executeUpdate();
+                        String checkEmpruntQuery = "SELECT * FROM Emprunts WHERE livre_id = ? AND student_id = ?";
+                        PreparedStatement checkEmpruntStatement = connection.prepareStatement(checkEmpruntQuery);
+                        checkEmpruntStatement.setString(1, misbn);
+                        checkEmpruntStatement.setString(2, mstudnumber);
+                        ResultSet existingEmpruntResult = checkEmpruntStatement.executeQuery();
 
-                        // Insérer l'emprunt dans la table Emprunts
-                        String insertEmpruntQuery = "INSERT INTO Emprunts (livre_id, student_id) " +
-                                "VALUES (?, (SELECT ID FROM student WHERE StudentNumber = ?))";
-                        PreparedStatement insertEmpruntStatement = connection.prepareStatement(insertEmpruntQuery);
-                        insertEmpruntStatement.setString(1, misbn);
-                        insertEmpruntStatement.setString(2, mstudnumber);
+                        if (!existingEmpruntResult.next()) {
+                            // Mettre à jour la disponibilité du livre
+                            String updateAvailabilityQuery = "UPDATE Livre SET Disponible = 0 WHERE ISBN = ?";
+                            PreparedStatement updateAvailabilityStatement = connection.prepareStatement(updateAvailabilityQuery);
+                            updateAvailabilityStatement.setString(1, misbn);
+                            updateAvailabilityStatement.executeUpdate();
 
-                        // Exécuter la requête
-                        int rowsAffected = insertEmpruntStatement.executeUpdate();
+                            // Insérer l'emprunt dans la table Emprunts
+                            String insertEmpruntQuery = "INSERT INTO Emprunts (livre_id, student_id) " +
+                                    "VALUES (?, (SELECT ID FROM student WHERE StudentNumber = ?))";
+                            PreparedStatement insertEmpruntStatement = connection.prepareStatement(insertEmpruntQuery);
+                            insertEmpruntStatement.setString(1, misbn);
+                            insertEmpruntStatement.setString(2, mstudnumber);
 
-                        if (rowsAffected > 0) {
-                            alert = new Alert(Alert.AlertType.INFORMATION);
-                            alert.setTitle("Admin Message");
-                            alert.setHeaderText(null);
-                            alert.setContentText("Livre emprunté avec succès.");
-                            alert.showAndWait();
-                        } else {
+                            // Exécuter la requête
+                            int rowsAffected = insertEmpruntStatement.executeUpdate();
+
+                            if (rowsAffected > 0) {
+                                alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Admin Message");
+                                alert.setHeaderText(null);
+                                alert.setContentText("Livre emprunté avec succès.");
+                                alert.showAndWait();
+                            } else {
+                                alert = new Alert(Alert.AlertType.ERROR);
+                                alert.setTitle("Message d'erreur");
+                                alert.setHeaderText(null);
+                                alert.setContentText("Échec de l'emprunt du livre.");
+                                alert.showAndWait();
+                            }
+                        }else {
                             alert = new Alert(Alert.AlertType.ERROR);
                             alert.setTitle("Message d'erreur");
                             alert.setHeaderText(null);
-                            alert.setContentText("Échec de l'emprunt du livre.");
+                            alert.setContentText("Vous avez déjà emprunté ce livre.");
                             alert.showAndWait();
-                        }
+
+                            }
+
                     } else {
                         alert = new Alert(Alert.AlertType.ERROR);
                         alert.setTitle("Message d'erreur");

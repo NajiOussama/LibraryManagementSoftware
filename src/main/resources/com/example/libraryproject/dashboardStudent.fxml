@@ -17,7 +17,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.dashboardStudentController">
    <children>
@@ -100,48 +99,6 @@
          <center>
             <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
                <tabs>
-                  <Tab text="Infos">
-                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                           <children>
-                              <VBox alignment="CENTER" prefHeight="391.0" prefWidth="482.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                                 <children>
-                                    <HBox alignment="CENTER" prefHeight="260.0" prefWidth="482.0">
-                                       <children>
-                                          <TextField promptText="ISBN">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                          </TextField>
-                                          <VBox alignment="CENTER" prefHeight="152.0" prefWidth="324.0">
-                                             <HBox.margin>
-                                                <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                             </HBox.margin>
-                                             <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nom du livre" textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Auteur " textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Disponibilité" textAlignment="CENTER" wrappingWidth="284.0849609375">
-                                                   <VBox.margin>
-                                                      <Insets top="10.0" />
-                                                   </VBox.margin>
-                                                </Text>
-                                             </children>
-                                          </VBox>
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </VBox>
-                           </children></AnchorPane>
-                     </content>
-                  </Tab>
                   <Tab text="Mes Emprunts">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -162,7 +119,7 @@
                                  <top>
                                     <VBox prefHeight="134.0" prefWidth="507.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <TextField fx:id="NE" promptText="Numéro Etudiant">
+                                          <TextField fx:id="NE" promptText="Mon Numéro Etudiant">
                                              <VBox.margin>
                                                 <Insets left="20.0" right="20.0" top="10.0" />
                                              </VBox.margin>
