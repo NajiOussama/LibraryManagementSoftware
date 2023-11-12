@@ -37,30 +37,24 @@ public class ListeLivresController implements Initializable {
 
     @FXML
     private AnchorPane rootPane;
-    private Connection connect = SqlController.connectDB();
 
-    private Statement statement;
-    private ResultSet result;
-
-    @FXML
+    @Override
     public void initialize(URL location, ResourceBundle resources) {
-
         AuthorCol.setCellValueFactory(new PropertyValueFactory<>("author"));
         AvailCol.setCellValueFactory(new PropertyValueFactory<>("dispo"));
         ISBNCol.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
         TitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
 
         tableView.setItems(getLivresFromDB());
-
     }
 
-    public static class Livre{
+    public static class Livre {
         private final SimpleStringProperty title;
         private final SimpleStringProperty ISBN;
         private final SimpleStringProperty author;
         private final SimpleBooleanProperty dispo;
 
-        Livre(String title,String id, String author, Boolean dispo){
+        Livre(String title, String id, String author, Boolean dispo) {
             this.title = new SimpleStringProperty(title);
             this.ISBN = new SimpleStringProperty(id);
             this.author = new SimpleStringProperty(author);
@@ -82,17 +76,14 @@ public class ListeLivresController implements Initializable {
         public boolean isDispo() {
             return dispo.get();
         }
-
     }
 
     public ObservableList<Livre> getLivresFromDB() {
         ObservableList<Livre> livresList = FXCollections.observableArrayList();
 
-        try {
-            String query = "SELECT Titre, Auteur, ISBN, Disponible FROM Livre";
-            connect = SqlController.connectDB();
-            statement = connect.createStatement();
-            result = statement.executeQuery(query);
+        try (Connection connect = SqlController.connectDB();
+             Statement statement = connect.createStatement();
+             ResultSet result = statement.executeQuery("SELECT Titre, Auteur, ISBN, Disponible FROM Livre")) {
 
             while (result.next()) {
                 String titre = result.getString("Titre");
@@ -102,41 +93,19 @@ public class ListeLivresController implements Initializable {
                 livresList.add(new Livre(titre, isbn, auteur, disponible));
             }
 
-            // Afficher les données récupérées
-            //for (Livre livre : livresList) {
-            //    System.out.println("Titre: " + livre.getTitle() + ", Auteur: " + livre.getAuthor() + ", ISBN: " + livre.getISBN() + ", Disponible: " + livre.isDispo());
-            //}
-
             return livresList;
         } catch (SQLException e) {
             Logger.getLogger(ListeLivresController.class.getName()).log(Level.SEVERE, null, e);
-            return null; // Assurez-vous de retourner une valeur par défaut en cas d'erreur
-        } finally {
-            try {
-                if (result != null) {
-                    result.close();
-                }
-                if (statement != null) {
-                    statement.close();
-                }
-                if (connect != null) {
-                    connect.close();
-                }
-            } catch (SQLException e) {
-                Logger.getLogger(ListeLivresController.class.getName()).log(Level.SEVERE, null, e);
-            }
+            showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la récupération des livres.");
+            return FXCollections.observableArrayList(); // Retourner une liste vide en cas d'erreur
         }
     }
 
-
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
-
-
-
-
-
-
-
-
-
-
+}
