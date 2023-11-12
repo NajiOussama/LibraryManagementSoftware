@@ -5,48 +5,53 @@
 
 state IHMLogin {
 
-state IHMAdherent
-state IHMAdmin
+state dashboardStudent
+state dashboardAdmin
 state Connexion
 
  [*] --> Connexion: Démarrage
- Connexion --> IHMAdmin : Connexion Admin
- Connexion --> IHMAdherent : Connexion Adherent
+ Connexion --> dashboardAdmin : Connexion Admin
+ Connexion --> dashboardStudent : Connexion Adherent
   }
 
-state IHMAdmin {
+state dashboardAdmin {
 
-state Initialisationdelabibliothèque
-state creerunenouvellebibliothèque
-state importerunebibliothèquedudisque
-state Gérerleslivres
-state Gérerlesutilisateurs
-state Gérerlesemprunts
-state Bibliothequechargee
+state VoirTouslesEmprunts
+state HistoriqueEmprunts
+state AjouterMembre
+state SupprimerMembre
+state AjouterLivre
+state SupprimerLivre
+state VoirTousLesMembres
+state seDeconnecter
 
-[*] --> Initialisationdelabibliothèque
-Initialisationdelabibliothèque --> creerunenouvellebibliothèque : Créer nouvelle bibliothèque
-Initialisationdelabibliothèque --> importerunebibliothèquedudisque : Importer bibliothèque
-creerunenouvellebibliothèque --> Bibliothequechargee : Bibliothèque créée
-importerunebibliothèquedudisque --> Bibliothequechargee : Bibliothèque importée
-Bibliothequechargee --> Gérerlesutilisateurs : Gérer les utilisateurs
-Bibliothequechargee --> Gérerlesemprunts : Gérer les emprunts
-Bibliothequechargee --> Gérerleslivres : Gérer les livres
-
+[*] --> VoirTouslesEmprunts
+[*] --> HistoriqueEmprunts
+[*] --> AjouterMembre
+[*] --> SupprimerMembre
+[*] --> AjouterLivre
+[*] --> SupprimerLivre
+[*] --> VoirTousLesMembres
+[*] --> VoirtouslesLivres
+[*] --> seDeconnecter
 
 }
 
-state IHMAdherent {
+state dashboardStudent {
 
-state Chercherunlivre
-state Demanderempruntlivre
-state Gérersesinformations
+state VoirLivresDisponibles
+state Emprunter
+state Retourner
+state VoirTouslesLivres
+state VoirMesEmprunts
+state SeDeconnecter
 
-[*] --> Chercherunlivre : Barre de recherche
-[*] --> Gérersesinformations : : Paramètres Profil
-Chercherunlivre --> Demanderempruntlivre :Demander emprunt
-Demanderempruntlivre--> Chercherunlivre : Retour
-
+[*] --> VoirMesEmprunts
+[*] --> VoirLivresDisponibles
+[*] --> Emprunter
+[*] --> Retourner
+[*] -->VoirTouslesLivres
+[*] --> SeDeconnecter
 
 
 @enduml

@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class AjouterLivreController {
@@ -49,6 +50,7 @@ public class AjouterLivreController {
         String auteur = Auteur.getText();
         String isbn = ISBN.getText();
         Alert alert;
+
         // Vérifiez que les champs ne sont pas vides
         if (titre.isEmpty() || auteur.isEmpty() || isbn.isEmpty()) {
             alert = new Alert(Alert.AlertType.ERROR);
@@ -56,14 +58,28 @@ public class AjouterLivreController {
             alert.setHeaderText(null);
             alert.setContentText("Veuillez remplir tous les champs vides.");
             alert.showAndWait();
+            return; // Sortez de la méthode si les champs sont vides
         }
 
-        if (!isNumeric(isbn) && !isbn.isEmpty()) {
+        // Vérifiez si le livre avec cet ISBN existe déjà
+        if (isBookExists(isbn)) {
+            alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Message d'erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Un livre avec cet ISBN existe déjà.");
+            alert.showAndWait();
+            return; // Sortez de la méthode si le livre existe déjà
+        }
+
+        // Autres validations
+
+        if (!isNumeric(isbn)) {
             alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Message d'erreur");
             alert.setHeaderText(null);
             alert.setContentText("L'ISBN doit être un nombre.");
             alert.showAndWait();
+            return; // Sortez de la méthode si l'ISBN n'est pas un nombre
         }
 
         // Établissez une connexion à la base de données
@@ -78,10 +94,8 @@ public class AjouterLivreController {
                 preparedStatement.setString(2, auteur);
                 preparedStatement.setString(3, isbn);
 
-
                 // Exécutez la requête
                 int rowsAffected = preparedStatement.executeUpdate();
-
 
                 if (rowsAffected > 0) {
                     alert = new Alert(Alert.AlertType.INFORMATION);
@@ -109,11 +123,43 @@ public class AjouterLivreController {
                 alert.setContentText("Échec de l'insertion du livre.");
                 alert.showAndWait();
             }
-        } else {
-
         }
     }
 
+    private boolean isBookExists(String isbn) {
+        // Vérifiez si le livre avec cet ISBN existe déjà dans la base de données
+        Connection connection = SqlController.connectDB();
+
+        if (connection != null) {
+            try {
+                String checkBookQuery = "SELECT COUNT(*) FROM Livre WHERE ISBN = ?";
+                PreparedStatement checkBookStatement = connection.prepareStatement(checkBookQuery);
+                checkBookStatement.setString(1, isbn);
+
+                ResultSet result = checkBookStatement.executeQuery();
+
+                if (result.next() && result.getInt(1) > 0) {
+                    // Le livre existe déjà
+                    return true;
+                }
+
+                // Le livre n'existe pas encore
+                return false;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    if (connection != null) {
+                        connection.close();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return false;
+    }
     @FXML
     private void cancel(ActionEvent event) {
         Stage stage = (Stage) rootPane.getScene().getWindow();

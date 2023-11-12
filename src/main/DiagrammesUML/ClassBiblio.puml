@@ -55,5 +55,5 @@ Livre--|>Emprunt : est emprunté
 Membre--|>Emprunt : a emprunté
 Emprunt--|>Controleur
 
-Admin --|> Membre : Hérite
+
 @enduml

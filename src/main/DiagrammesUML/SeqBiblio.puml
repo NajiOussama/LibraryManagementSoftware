@@ -1,23 +1,30 @@
 @startuml
+actor Student
+participant "Application" as App
+database Library
+actor Librarian
 
-title Exemple d'Interaction Utilisateur
+Student -> App: Se connecte
+App -> Library: Requête d'authentification
+Library --> App: Authentification réussie
 
-actor Utilisateur
-participant IHM
-participant Contrôleur
-database "Base de Données" as BD
-participant Objet1
-participant Objet2
-participant Objet3
+alt Authentification réussie
+    Student -> App: Saisit les informations
+    App -> Library: Requête d'emprunt
+    Library --> App: Vérification de la disponibilité
+    alt Livre disponible
+        App -> Library: Enregistre l'emprunt
+        Library --> App: Confirmation
+    else Livre non disponible
+        Library --> App: Message d'erreur
+    end
+else Authentification échouée
+    Library --> App: Message d'erreur
+end
 
-Utilisateur -> IHM: Clique sur "Afficher Emprunts"
-IHM -> Contrôleur: Callback - Afficher Emprunts
-Contrôleur -> BD: Requête SQL - Sélectionner Emprunts
-BD --> Contrôleur: Résultats de la requête
-Contrôleur -> Objet1: Instanciation d'objets Emprunt
-Contrôleur -> Objet2: Instanciation d'objets Livre
-Contrôleur -> Objet3: Instanciation d'objets Adhérent
-Contrôleur -> IHM: Mise à jour de l'IHM avec les Emprunts
-IHM --> Utilisateur: Affiche les Emprunts
+Student -> App: Visualise ses emprunts
+App -> Library: Requête des emprunts
+Library --> App: Liste des emprunts
 
+Student -> App: Se déconnecte
 @enduml
