@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="662.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.dashboardStudentController">
+<StackPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="479.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.libraryproject.dashboardStudentController">
    <children>
       <BorderPane prefHeight="250.0" prefWidth="200.0">
          <top>
@@ -107,9 +107,10 @@
                                  <center>
                                     <TableView fx:id="tableView" prefHeight="396.0" prefWidth="507.0" BorderPane.alignment="CENTER">
                                       <columns>
-                                        <TableColumn fx:id="TitCol" prefWidth="168.0" text="Titre" />
-                                        <TableColumn fx:id="AutCol" prefWidth="168.0" text="Auteur " />
-                                          <TableColumn fx:id="isbnCol" prefWidth="168.0" text="ISBN" />
+                                        <TableColumn fx:id="TitCol" prefWidth="150.0" text="Titre" />
+                                        <TableColumn fx:id="AutCol" prefWidth="150.0" text="Auteur " />
+                                          <TableColumn fx:id="isbnCol" prefWidth="150.0" text="ISBN" />
+                                          <TableColumn fx:id="dateCol" prefWidth="150.0" text="date de prêt " />
                                       </columns>
                                        <BorderPane.margin>
                                           <Insets />

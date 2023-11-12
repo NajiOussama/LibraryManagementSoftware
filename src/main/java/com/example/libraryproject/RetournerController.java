@@ -81,6 +81,12 @@ public class RetournerController {
                         int rowsAffected = deleteEmpruntStatement.executeUpdate();
 
                         if (rowsAffected > 0) {
+                            String updateHistoriqueQuery = "UPDATE Historique SET date_retour = CURDATE() WHERE livre_id = ? AND student_id = (SELECT ID FROM student WHERE StudentNumber = ?)";
+                            PreparedStatement updateHistoriqueStatement = connection.prepareStatement(updateHistoriqueQuery);
+                            updateHistoriqueStatement.setString(1, misbn);
+                            updateHistoriqueStatement.setString(2, mstudnumber);
+                            updateHistoriqueStatement.executeUpdate();
+
                             alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Student Message");
                             alert.setHeaderText(null);

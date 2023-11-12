@@ -35,6 +35,9 @@ public class dashboardStudentController {
     private TableColumn<LivreE, String> TitCol;
 
     @FXML
+    private TableColumn<?, ?> dateCol;
+
+    @FXML
     private TableColumn<LivreE, String> isbnCol;
 
     @FXML
@@ -48,13 +51,9 @@ public class dashboardStudentController {
     private TextField NE;
 
 
+
     @FXML
     void AfficherEmprunts(ActionEvent event) {
-        AutCol.setCellValueFactory(new PropertyValueFactory<>("author"));
-        isbnCol.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
-        TitCol.setCellValueFactory(new PropertyValueFactory<>("title"));
-
-        tableView.setItems(getLivresFromDB());
 
 
         String studentNumber = NE.getText();
@@ -62,80 +61,96 @@ public class dashboardStudentController {
 
         if (studentNumber.isEmpty() || password.isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Erreur", "Veuillez remplir tous les champs.");
-            return;
-        }
+        }else {
+            AutCol.setCellValueFactory(new PropertyValueFactory<>("author"));
+            isbnCol.setCellValueFactory(new PropertyValueFactory<>("ISBN"));
+            TitCol.setCellValueFactory(new PropertyValueFactory<>("title"));
+            dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        Connection connection = SqlController.connectDB();
+            tableView.setItems(getLivresFromDB());
 
-        if (connection != null) {
-            try {
-                // Vérifier l'authentification de l'étudiant
-                String authenticateQuery = "SELECT ID FROM student WHERE StudentNumber = ? AND password = ?";
-                PreparedStatement authenticateStatement = connection.prepareStatement(authenticateQuery);
-                authenticateStatement.setString(1, studentNumber);
-                authenticateStatement.setString(2, password);
+            Connection connection = SqlController.connectDB();
 
-                ResultSet authenticateResult = authenticateStatement.executeQuery();
-
-                if (authenticateResult.next()) {
-                    int studentID = authenticateResult.getInt("ID");
-
-                    // Récupérer les livres empruntés par l'étudiant
-                    String empruntsQuery = "SELECT Livre.Auteur, Livre.Titre, Livre.ISBN " +
-                            "FROM Emprunts " +
-                            "JOIN Livre ON Emprunts.livre_id = Livre.ISBN " +
-                            "WHERE Emprunts.student_id = ?";
-                    PreparedStatement empruntsStatement = connection.prepareStatement(empruntsQuery);
-                    empruntsStatement.setInt(1, studentID);
-
-                    ResultSet empruntsResult = empruntsStatement.executeQuery();
-
-                    ObservableList<LivreE> empruntsList = FXCollections.observableArrayList();
-
-                    while (empruntsResult.next()) {
-                        String auteur = empruntsResult.getString("Auteur");
-                        String titre = empruntsResult.getString("Titre");
-                        String isbn = empruntsResult.getString("ISBN");
-
-                        empruntsList.add(new LivreE(titre, isbn, auteur));
-                    }
-
-                    // Mettre à jour la TableView
-                    tableView.setItems(empruntsList);
-                } else {
-                    showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Étudiant non trouvé avec les informations fournies.");
-                }
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la récupération des emprunts.");
-            } finally {
+            if (connection != null) {
                 try {
-                    if (connection != null) {
-                        connection.close();
+                    // Vérifier l'authentification de l'étudiant
+                    String authenticateQuery = "SELECT ID FROM student WHERE StudentNumber = ? AND password = ?";
+                    PreparedStatement authenticateStatement = connection.prepareStatement(authenticateQuery);
+                    authenticateStatement.setString(1, studentNumber);
+                    authenticateStatement.setString(2, password);
+
+                    ResultSet authenticateResult = authenticateStatement.executeQuery();
+
+                    if (authenticateResult.next()) {
+                        int studentID = authenticateResult.getInt("ID");
+
+                        // Récupérer les livres empruntés par l'étudiant
+                        String empruntsQuery = "SELECT Livre.Auteur, Livre.Titre, Livre.ISBN,Historique.date_pret " +
+                                "FROM Emprunts " +
+                                "JOIN Livre ON Emprunts.livre_id = Livre.ISBN " +
+                                "JOIN Historique ON Historique.livre_id = Livre.ISBN "+
+                                "WHERE Emprunts.student_id = ?";
+                        PreparedStatement empruntsStatement = connection.prepareStatement(empruntsQuery);
+                        empruntsStatement.setInt(1, studentID);
+
+                        ResultSet empruntsResult = empruntsStatement.executeQuery();
+
+                        ObservableList<LivreE> empruntsList = FXCollections.observableArrayList();
+
+                        while (empruntsResult.next()) {
+                            String auteur = empruntsResult.getString("Auteur");
+                            String titre = empruntsResult.getString("Titre");
+                            String isbn = empruntsResult.getString("ISBN");
+                            String date = empruntsResult.getString("date_pret");
+
+                            empruntsList.add(new LivreE(titre, isbn, auteur,date));
+                        }
+
+                        // Mettre à jour la TableView
+                        tableView.setItems(empruntsList);
+                    } else {
+                        showAlert(Alert.AlertType.ERROR, "Erreur d'authentification", "Étudiant non trouvé avec les informations fournies.");
                     }
+
                 } catch (SQLException e) {
                     e.printStackTrace();
+                    showAlert(Alert.AlertType.ERROR, "Erreur", "Une erreur s'est produite lors de la récupération des emprunts.");
+                } finally {
+                    try {
+                        if (connection != null) {
+                            connection.close();
+                        }
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
+
         }
+
+
     }
 
     public static class LivreE {
         private final SimpleStringProperty title;
         private final SimpleStringProperty ISBN;
         private final SimpleStringProperty author;
+        private final SimpleStringProperty date;
 
 
-        LivreE(String title, String id, String author) {
+        LivreE(String title, String id, String author,String date) {
             this.title = new SimpleStringProperty(title);
             this.ISBN = new SimpleStringProperty(id);
             this.author = new SimpleStringProperty(author);
+            this.date = new SimpleStringProperty(date);
 
         }
 
         public String getTitle() {
             return title.get();
+        }
+        public String getDate() {
+            return date.get();
         }
 
         public String getISBN() {
@@ -153,14 +168,18 @@ public class dashboardStudentController {
 
         try (Connection connect = SqlController.connectDB();
              Statement statement = connect.createStatement();
-             ResultSet result = statement.executeQuery("SELECT Titre, Auteur, ISBN, Disponible FROM Livre")) {
+             ResultSet result = statement.executeQuery("SELECT Livre.Titre, Livre.Auteur, Livre.ISBN, Historique.date_pret " +
+                     "FROM Emprunts " +
+                     "JOIN Livre ON Emprunts.livre_id = Livre.ISBN " +
+                     "JOIN Historique ON Historique.livre_id = Livre.ISBN")) {
 
             while (result.next()) {
                 String titre = result.getString("Titre");
                 String auteur = result.getString("Auteur");
                 String isbn = result.getString("ISBN");
-                boolean disponible = result.getBoolean("Disponible");
-                livresList.add(new LivreE(titre, isbn, auteur));
+                String date = result.getString("date_pret");
+
+                livresList.add(new LivreE(titre, isbn, auteur, date));
             }
 
             return livresList;
