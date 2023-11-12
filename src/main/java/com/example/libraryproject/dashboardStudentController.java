@@ -207,6 +207,31 @@ public class dashboardStudentController {
     }
 
     @FXML
+    void LivresDispo(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("LivresDispo.fxml"));
+
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    @FXML
+    void Retourner(ActionEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("Retourner.fxml"));
+
+        Stage stage = new Stage();
+
+        Scene scene = new Scene(root);
+
+        stage.setScene(scene);
+        stage.show();
+
+    }
+
+    @FXML
     void SeDeco(ActionEvent event) throws IOException {
         Stage stage = (Stage) rootPane.getScene().getWindow();
         stage.close();
