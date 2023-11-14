@@ -1,0 +1,49 @@
+@startuml
+actor Admin
+participant "Application" as App
+database OussamaDB
+
+
+Admin -> App: Se connecte
+App -> OussamaDB: Requête d'authentification
+OussamaDB --> App: Authentification réussie
+
+alt Authentification réussie
+    Admin -> App: Voir les emprunts actuels des étudiants
+    App -> OussamaDB: Requête d'emprunts actuels
+    OussamaDB --> App: Liste des emprunts actuels
+
+    Admin -> App: Voir l'historique de tous les emprunts
+    App -> OussamaDB: Requête d'historique
+    OussamaDB --> App: Liste de l'historique des emprunts
+
+    Admin -> App: Ajouter un étudiant
+    App -> OussamaDB: Requête d'ajout d'étudiant
+    OussamaDB --> App: Confirmation d'ajout d'étudiant
+
+    Admin -> App: Supprimer un étudiant
+    App -> OussamaDB: Requête de suppression d'étudiant
+    OussamaDB --> App: Confirmation de suppression d'étudiant
+
+    Admin -> App: Ajouter un livre
+    App -> OussamaDB: Requête d'ajout de livre
+    OussamaDB --> App: Confirmation d'ajout de livre
+
+    Admin -> App: Supprimer un livre
+    App -> OussamaDB: Requête de suppression de livre
+    OussamaDB --> App: Confirmation de suppression de livre
+
+    Admin -> App: Voir les informations de tous les étudiants
+    App -> OussamaDB: Requête d'informations des étudiants
+    OussamaDB --> App: Liste des informations des étudiants
+
+    Admin -> App: Voir les informations de tous les livres
+    App -> OussamaDB: Requête d'informations des livres
+    OussamaDB --> App: Liste des informations des livres
+
+    Admin -> App: Se déconnecte
+else Authentification échouée
+    OussamaDB --> App: Message d'erreur
+end
+
+@enduml

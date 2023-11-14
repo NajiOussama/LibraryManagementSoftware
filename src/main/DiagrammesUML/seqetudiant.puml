@@ -1,0 +1,42 @@
+@startuml
+actor Student
+participant "Application" as App
+database OussamaDB
+
+
+Student -> App: Se connecte
+App -> OussamaDB: Requête d'authentification
+OussamaDB --> App: Authentification réussie
+
+alt Authentification réussie
+    Student -> App: Saisit les informations
+    App -> OussamaDB: Requête d'emprunt
+    OussamaDB --> App: Vérification de la disponibilité
+    alt Livre disponible
+        App -> OussamaDB: Enregistre l'emprunt
+        OussamaDB --> App: Confirmation
+    else Livre non disponible
+        OussamaDB --> App: Message d'erreur
+    end
+
+    Student -> App: Visualise ses emprunts
+    App -> OussamaDB: Requête des emprunts
+    OussamaDB --> App: Liste des emprunts
+
+    Student -> App: Retourne un livre
+    App -> OussamaDB: Requête de retour
+    OussamaDB --> App: Confirmation de retour
+
+    Student -> App: Visualise les livres disponibles
+    App -> OussamaDB: Requête des livres disponibles
+    OussamaDB --> App: Liste des livres disponibles
+
+    Student -> App: Visualise tous les livres
+    App -> OussamaDB: Requête de tous les livres
+    OussamaDB --> App: Liste de tous les livres
+else Authentification échouée
+    OussamaDB --> App: Message d'erreur
+end
+
+Student -> App: Se déconnecte
+@enduml
