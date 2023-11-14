@@ -58,18 +58,12 @@ public class SupprimerLivreController {
             alert.showAndWait();
         }
 
-        if (!isNumeric(isbn) && !isbn.isEmpty()) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Message d'erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("L'ISBN doit être un nombre.");
-            alert.showAndWait();
-        }
+
 
         // Établissez une connexion à la base de données
         Connection connection = SqlController.connectDB();
 
-        if (connection != null && isNumeric(isbn)) {
+        if (connection != null ) {
             try {
                 // Créez la requête SQL d'insertion
                 String deleteQuery = "DELETE FROM Livre WHERE Titre = ? AND Auteur = ? AND ISBN = ?";

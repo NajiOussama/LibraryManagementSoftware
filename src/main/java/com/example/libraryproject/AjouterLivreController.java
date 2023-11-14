@@ -73,19 +73,11 @@ public class AjouterLivreController {
 
         // Autres validations
 
-        if (!isNumeric(isbn)) {
-            alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Message d'erreur");
-            alert.setHeaderText(null);
-            alert.setContentText("L'ISBN doit être un nombre.");
-            alert.showAndWait();
-            return; // Sortez de la méthode si l'ISBN n'est pas un nombre
-        }
 
         // Établissez une connexion à la base de données
         Connection connection = SqlController.connectDB();
 
-        if (connection != null && isNumeric(isbn)) {
+        if (connection != null ) {
             try {
                 // Créez la requête SQL d'insertion
                 String insertQuery = "INSERT INTO Livre (Titre, Auteur, ISBN) VALUES (?, ?, ?)";
